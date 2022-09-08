@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>理解数据代理</title>
+    </head>
+    <body>
+        <script>
+            let obj = { x: 100 };
+            let obj2 = { y: 200 };
+
+            // 通过数据代理，可以让obj2代理obj，这样obj2就可以访问obj的属性了
+            Object.defineProperty(obj2, 'x', {
+                get() {
+                    return obj.x;
+                },
+                set(value) {
+                    obj.x = value;
+                },
+            });
+        </script>
+    </body>
+</html>

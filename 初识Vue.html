@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>初识Vue</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>你好，{{name}}</h1>
+            <h2>Hello,{{name}}</h2>
+        </div>
+
+        <!-- 1.引入Vue -->
+        <script src="./js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            // 2.创建Vue实例
+            new Vue({
+                el: '#app', // el用于指定当前Vue实例为哪个容器服务，值通常为容器的选择器
+                data: {
+                    // data用于指定当前Vue实例中的数据，值通常为一个对象，数据供el所指定的容器使用
+                    name: 'isYangs',
+                },
+            });
+        </script>
+    </body>
+</html>

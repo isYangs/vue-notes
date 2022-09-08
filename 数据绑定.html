@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>数据绑定</title>
+    </head>
+    <body>
+        <div id="app">
+            单向数据绑定：
+            <input type="text" v-bind:value="value" />
+            <br />
+            双向数据绑定：
+            <input type="text" v-model:value="value" />
+            <!-- v-model只能应用在表单类元素(输入类元素)上 -->
+            <!-- v-model可以简写为v-model -->
+            <input type="text" v-model="value" />
+        </div>
+        <script src="./js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            new Vue({
+                el: '#app',
+                data: {
+                    value: 'Hello,Vue!',
+                },
+            });
+        </script>
+    </body>
+</html>

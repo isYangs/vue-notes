@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MVVM模型</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>昵称：{{name}}</h1>
+            <h1>年龄：{{age}}</h1>
+            <h1>测试一下：{{$options}}</h1>
+        </div>
+        <script src="./js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    name: 'isYangs',
+                    age: 18,
+                },
+            });
+            console.log(vm);
+        </script>
+    </body>
+</html>
