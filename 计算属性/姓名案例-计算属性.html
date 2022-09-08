@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>姓名案例-计算属性</title>
+    </head>
+    <body>
+        <div id="app">
+            姓：
+            <input type="text" v-model="firstName" />
+            <br />
+            名：
+            <input type="text" v-model="lastName" />
+            <br />
+            全名：
+            <span>{{fullName}}</span>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    firstName: '张',
+                    lastName: '三',
+                },
+                computed: {
+                    fullName: {
+                        // 当有人读取fullName的值时，会自动调用get方法，且返回值就作为fullName的值
+                        // get什么时候调用？1、初次读取fullName时 2、依赖的数据发生变化时
+                        get() {
+                            return this.firstName + ' - ' + this.lastName;
+                        },
+                        // set什么时候调用？1、当fullName被修改时
+                        set(value) {
+                            const names = value.split('-');
+                            this.firstName = names[0];
+                            this.lastName = names[1];
+                        },
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

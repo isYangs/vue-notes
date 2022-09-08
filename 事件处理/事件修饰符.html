@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>事件修饰符</title>
+        <style>
+            * {
+                margin: 20px 0;
+                padding: 0 20px;
+            }
+            .demo1 {
+                width: 200px;
+                height: 200px;
+                border: 5px solid #000;
+            }
+            .box1 {
+                width: 200px;
+                height: 200%;
+                padding: 5px;
+                border: 5px solid #00ed86;
+            }
+            .box2 {
+                width: 100px;
+                height: 100%;
+                padding: 5px;
+                border: 5px solid #06f9a8;
+            }
+            .list {
+                width: 200px;
+                height: 200px;
+                background: #024dfc;
+                overflow: auto;
+            }
+            .list > li {
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h1>欢迎访问{{name}}的主页</h1>
+            <!-- 阻止默认事件（常用） -->
+            <a href="https://xuewuzhibu.cn" @click.prevent="showInfo">点我提示信息</a>
+            <!-- 阻止事件冒泡 （常用） -->
+            <div class="demo1" @click="showInfo">
+                <button @click.stop="showInfo">点我提示信息</button>
+            </div>
+            <!-- 事件只触发一次 （常用） -->
+            <button @click.once="showInfo">点我提示信息</button>
+            <!-- 使用事件的捕获模式 -->
+            <div class="box1" @click.capture="showMsg(1)">
+                div1
+                <div class="box2" @click.stop="showMsg(2)">div1</div>
+            </div>
+            <!-- 只有event.target是当前操作元素时才触发事件 -->
+            <div class="demo1" @click.self="showInfo">
+                <button @click="showInfo">点我提示信息</button>
+            </div>
+            <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+            <!-- 滚动有两个 一个是scroll 另一个是wheel 前者是滚动条 后者是鼠标滚轮 使用前者可以用键盘↑↓←→触发-->
+            <ul @scroll="demo" class="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            new Vue({
+                el: '#app',
+                data: {
+                    name: 'isYangs',
+                },
+                methods: {
+                    showInfo(evt) {
+                        alert('欢迎你的到来！！！');
+                        // console.log(evt.target);
+                    },
+                    showMsg(num) {
+                        console.log(`当前正在点击的是div${num}`);
+                    },
+                    demo() {
+                        for (let i = 0; i < 10000; i++) {
+                            console.log('#');
+                        }
+                        console.log('累死了');
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

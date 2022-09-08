@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>键盘事件</title>
+        <style>
+            .text {
+                width: 400px;
+                height: 100px;
+                font-size: 24px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <h1>欢迎访问{{name}}的个人主页</h1>
+            <!-- 如果需要用到的按键Vue中没有提供别名就可以提供 evt中的key来查看按键名 例如CapsLock 但是如果要写就要这样写caps-lock -->
+            <input
+                class="text"
+                type="text"
+                placeholder="按下回车提示输入"
+                @keyup.enter="showInfo"
+            />
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    name: 'isYangs',
+                },
+                methods: {
+                    showInfo(evt) {
+                        console.log(evt.target.value);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
