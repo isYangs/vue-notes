@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>列表过滤</title>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" placeholder="请输入姓名" v-model="keyWord" />
+            <ul>
+                <li v-for="item in filPersons" :key="item.id">
+                    {{ item.name }}-{{ item.age }}-{{ item.sex }}
+                </li>
+            </ul>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            // 用watch实现列表过滤
+            /* new Vue({
+                el: '#app',
+                data: {
+                    keyWord: '',
+                    persons: [
+                        { id: 1, name: '马冬梅', age: 19, sex: '女' },
+                        { id: 2, name: '周冬雨', age: 20, sex: '女' },
+                        { id: 3, name: '周杰伦', age: 21, sex: '男' },
+                        { id: 4, name: '温兆伦', age: 22, sex: '男' },
+                    ],
+                    filPersons: [],
+                },
+                watch: {
+                    keyWord: {
+                        immediate: true,
+                        handler(val) {
+                            this.filPersons = this.persons.filter(item => {
+                                return item.name.includes(val);
+                            });
+                        },
+                    },
+                },
+            }); */
+
+            new Vue({
+                el: '#app',
+                data: {
+                    keyWord: '',
+                    persons: [
+                        { id: 1, name: '马冬梅', age: 19, sex: '女' },
+                        { id: 2, name: '周冬雨', age: 20, sex: '女' },
+                        { id: 3, name: '周杰伦', age: 21, sex: '男' },
+                        { id: 4, name: '温兆伦', age: 22, sex: '男' },
+                    ],
+                },
+                computed: {
+                    filPersons() {
+                        return this.persons.filter(item => {
+                            return item.name.includes(this.keyWord);
+                        });
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

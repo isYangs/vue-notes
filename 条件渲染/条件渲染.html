@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>条件渲染</title>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用v-show做条件渲染 -->
+            <!-- <h1 v-show="true">欢迎来到{{name}}的主页</h1> -->
+            <!-- <h1 v-show="1 === 1">欢迎来到{{name}}的主页</h1> -->
+            <h1 v-show="titleState">欢迎来到{{name}}的主页</h1>
+
+            <!-- 使用v-if做条件渲染 -->
+            <h1 v-if="false">欢迎来到{{name}}的主页</h1>
+            <h1 v-if="1 === 1">欢迎来到{{name}}的主页</h1>
+
+            <h2>当前的n值是 {{n}}</h2>
+            <button @click="n++">点我n+1</button>
+
+            <!-- v-else和v-else-if -->
+            <div v-if="n === 1">Angular</div>
+            <div v-else-if="n === 2">React</div>
+            <div v-else-if="n === 3">Vue</div>
+            <div v-else>你好</div>
+
+            <!-- v-if和template的配合使用 -->
+            <template v-if="n === 1">
+                <h2>你好</h2>
+                <h2>isYangs</h2>
+                <h2>上海</h2>
+            </template>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    name: 'isYangs',
+                    titleState: true,
+                    n: 0,
+                },
+            });
+        </script>
+    </body>
+</html>

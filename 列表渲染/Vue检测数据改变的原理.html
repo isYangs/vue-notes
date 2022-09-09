@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue检测数据改变的原理</title>
+    </head>
+    <body>
+        <div id="app">
+            <h2>昵称：{{ name }}</h2>
+            <h2>地址：{{ address }}</h2>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    name: 'isYangs',
+                    address: '西安',
+                },
+            });
+        </script>
+    </body>
+</html>

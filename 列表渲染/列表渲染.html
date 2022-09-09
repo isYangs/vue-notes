@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>列表渲染</title>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 遍历数组 -->
+            <h2>遍历数组</h2>
+            <ul>
+                <li v-for="item in personsArr" :key="item.id">{{ item.name }}-{{ item.age }}</li>
+            </ul>
+            <!-- 遍历对象 -->
+            <h2>遍历对象</h2>
+            <ul>
+                <li v-for="(val,k) in personsObj" :key="k">{{ k }}:{{ val }}</li>
+            </ul>
+            <!-- 遍历指定次数 （用的少） -->
+            <h2>遍历指定次数</h2>
+            <ul>
+                <li v-for="(item,index) in 5" :key="item">{{ item }}-{{ index }}</li>
+            </ul>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    personsArr: [
+                        { id: 1, name: '张三', age: 18 },
+                        { id: 2, name: '李四', age: 19 },
+                        { id: 3, name: '王五', age: 20 },
+                    ],
+                    personsObj: {
+                        name: '张三',
+                        age: 18,
+                        address: '北京市',
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

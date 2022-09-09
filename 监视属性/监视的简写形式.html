@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>监视的简写形式</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>今天天气很{{info}}</h1>
+            <button @click="changeWeather">切换天气</button>
+        </div>
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    isHot: true,
+                },
+                computed: {
+                    info() {
+                        return this.isHot ? '炎热' : '凉爽';
+                    },
+                },
+                methods: {
+                    changeWeather() {
+                        this.isHot = !this.isHot;
+                    },
+                },
+                watch: {
+                    /* isHot(newValue, oldValue) {
+                        console.log('isHot发生变化了', newValue, oldValue);
+                    }, */
+                },
+            });
+            vm.$watch('isHot', function (newValue, oldValue) {
+                console.log('isHot发生变化了', newValue, oldValue);
+            });
+        </script>
+    </body>
+</html>

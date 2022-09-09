@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>绑定样式</title>
+        <style>
+            * {
+                margin: 20px 20px;
+                padding: 0;
+            }
+            .default {
+                width: 200px;
+                height: 200px;
+                border: 5px solid #000;
+            }
+            .red {
+                background: #ff2a00;
+            }
+            .green {
+                background: #08e953;
+            }
+            .blue {
+                background: #00a0ff;
+            }
+            .ts1 {
+                font-size: 36px;
+            }
+            .ts2 {
+                color: #ff2a00;
+            }
+            .ts3 {
+                border-radius: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 绑定class样式 --- 字符串写法 适用于：样式的类名不确定，需要动态指定-->
+            <div class="default" :class="color" @click="changeColor">{{name}}</div>
+            <!-- 绑定class样式 --- 数组写法 适用于：要绑定的样式个数不确定、名字也不确定-->
+            <div class="default" :class="textStyle">{{name}}</div>
+            <!-- 绑定class样式 --- 对象写法 适用于：要绑定的样式个数不确定、名字也不确定，但要动态决定用不用-->
+            <div class="default" :class="textStyleObj">{{name}}</div>
+            
+            <!-- 绑定style样式 --- 对象写法 -->
+            <div class="default" :style="styleObj">{{name}}</div>
+            <!-- 绑定style样式 --- 数组写法 -->
+            <div class="default" :style="styleArr">{{name}}</div>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    name: '绑定样式',
+                    color: 'red',
+                    textStyle: ['ts1', 'ts2', 'ts3'],
+                    textStyleObj: {
+                        ts1: true,
+                        ts2: true,
+                    },
+                    styleObj: {
+                        fontSize: '48px',
+                        color: 'white',
+                        background: 'pink',
+                    },
+                    styleArr: [
+                        {
+                            fontSize: '48px',
+                            color: 'white',
+                            background: 'purple',
+                        },
+                    ],
+                },
+                methods: {
+                    changeColor() {
+                        const colors = ['red', 'green', 'blue'];
+                        const index = Math.floor(Math.random() * 3);
+                        this.color = colors[index];
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -7,15 +7,61 @@
         <title>深度监视</title>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <h1>今天天气很{{info}}</h1>
+            <button @click="changeWeather">切换天气</button>
+            <hr />
+            <h3>a的值是：{{numbers.a}}</h3>
+            <button @click="numbers.a++">点我让a+1</button>
+            <h3>b的值是：{{numbers.b}}</h3>
+            <button @click="numbers.b++">点我让b+1</button>
+        </div>
 
         <script src="../js/vue.js"></script>
         <script>
             Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
 
-            new Vue({
+            const vm = new Vue({
                 el: '#app',
-                data: {},
+                data: {
+                    isHot: true,
+                    numbers: {
+                        a: 1,
+                        b: 1,
+                    },
+                },
+                computed: {
+                    info() {
+                        return this.isHot ? '炎热' : '凉爽';
+                    },
+                },
+                methods: {
+                    changeWeather() {
+                        this.isHot = !this.isHot;
+                    },
+                },
+                watch: {
+                    isHot: {
+                        // immediate:true, // 初始化时让handler调用一下
+                        // handler什么时候调用？当isHot发生变化的时候
+                        handler(newValue, oldValue) {
+                            console.log('isHot发生变化了', newValue, oldValue);
+                        },
+                    },
+                    /* 'numbers.a': {
+                        // 监视多级结构中某个属性的变化
+                        handler() {
+                            console.log('a发生变化了');
+                        },
+                    }, */
+                    numbers:{
+                        // 监视多级结构中所有属性的变化
+                        deep:true, // 深度监视
+                        handler(){
+                            console.log('numbers发生变化了');
+                        }
+                    }
+                },
             });
         </script>
     </body>
