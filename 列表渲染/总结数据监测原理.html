@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>总结数据监测原理</title>
+</head>
+<body>
+    <div id="app">
+        <h1>学生信息</h1>
+        <button @click="student.age++">年龄+1岁</button><br><br>
+        <button @click="addSex">添加性别属性，默认值：男</button><br><br>
+        <button @click="addFriend">在列表首位添加一个朋友</button><br><br>
+        <button @click="updateFirstFriendName">修改第一个的名字为：张三</button><br><br>
+        <button @click="addHobby">添加一个爱好</button><br><br>
+        <button @click="filterSoccer">过滤掉爱好中的：足球</button><br><br>
+        <button @click="updateFirstHobby">修改第一个爱好为：Coding</button><br><br>
+        <h3>姓名：{{student.name}}</h3>
+        <h3>年龄：{{student.age}}</h3>
+        <h3 v-if="student.sex">性别：{{student.sex}}</h3>
+        <h3>爱好</h3>
+        <ul>
+            <li v-for="item in student.hobby" :key="item.id">
+                {{item}}
+            </li>
+        </ul>
+        <h3>朋友</h3>
+        <ul>
+            <li v-for="item in student.friend" :key="item.id">
+                {{item.name}} - {{item.age}}
+            </li>
+    </div>
+    
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+    
+        new Vue({
+            el: '#app',
+            data: {
+                student: {
+                    name: '小明',
+                    age: 18,
+                    hobby: ['篮球', '足球', '乒乓球'],
+                    friend: [
+                        { id:1, name: '小红', age: 18},
+                        { id:2, name: '小刚', age: 19}
+                    ]
+                }
+            },
+            methods: {
+                addSex() {
+                    // Vue.set(this.student,'sex','男')
+                    this.$set(this.student,'sex','男')
+                },
+                addFriend(){
+                    this.student.friend.unshift({ id:3, name: '小张', age: 17},)
+                },
+                updateFirstFriendName(){
+                    this.student.friend[0].name = '张三'
+                },
+                addHobby(){
+                    this.student.hobby.push('听音乐')
+                },
+                updateFirstHobby(){
+                    // this.student.hobby.splice(0,1,'Coding')
+                    // Vue.set(this.student.hobby,0,'Coding')
+                    this.$set(this.student.hobby,0,'Coding')
+                },
+                filterSoccer(){
+                    this.student.hobby = this.student.hobby.filter(item => item !== '足球')
+                }
+            },
+        });
+    </script>
+</body>
+</html>

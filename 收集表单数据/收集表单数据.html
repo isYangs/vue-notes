@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>手机表单数据</title>
+    </head>
+    <body>
+        <div id="app">
+            <form @submit.prevent="submit">
+                <!-- <label for="username">账号：</label>
+                <input type="text" v-model="username" id="username" />
+                <br /> -->
+                账号：
+                <input type="text" v-model.trim="userInfo.account" />
+                <br />
+                <br />
+                密码：
+                <input type="password" v-model="userInfo.password" />
+                <br />
+                <br />
+                年龄：
+                <input type="number" v-model.number="userInfo.age" />
+                <br />
+                <br />
+                性别：
+                <input type="radio" name="sex" v-model="userInfo.sex" value="male" />
+                <span>男</span>
+                <input type="radio" name="sex" v-model="userInfo.sex" value="female" />
+                <span>女</span>
+                <br />
+                <br />
+                爱好：
+                <input type="checkbox" v-model="userInfo.hobby" value="music" />
+                <span>听音乐</span>
+                <input type="checkbox" v-model="userInfo.hobby" value="movie" />
+                <span>看电影</span>
+                <input type="checkbox" v-model="userInfo.hobby" value="coding" />
+                <span>Coding</span>
+                <br />
+                <br />
+                所属校区：
+                <select v-model="userInfo.city">
+                    <option value="">请选择校区</option>
+                    <option value="xian">西安</option>
+                    <option value="shanghai">上海</option>
+                    <option value="beijing">北京</option>
+                </select>
+                <br />
+                <br />
+                其他信息:
+                <textarea v-model.lazy="userInfo.other"></textarea>
+                <br />
+                <br />
+                <input type="checkbox" v-model="userInfo.agree" />
+                阅读并接受
+                <a href="">《用户协议》</a>
+                <br />
+                <br />
+                <button>提交</button>
+            </form>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            new Vue({
+                el: '#app',
+                data: {
+                    userInfo: {
+                        account: '',
+                        password: '',
+                        age: '',
+                        sex: 'male',
+                        hobby: [],
+                        city: '',
+                        other: '',
+                        agree: '',
+                    },
+                },
+                methods: {
+                    submit() {
+                        const str = JSON.stringify(this.userInfo);
+                        console.log(str);
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

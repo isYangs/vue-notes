@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue监测数据原理_数组</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>用户信息</h1>
+            <button @click="addWork">添加工作</button>
+            <h2>昵称：{{ user.name }}</h2>
+            <h2>地址：{{ user.address }}</h2>
+            <h2 v-if="user.work">工作：{{ user.work }}</h2>
+            <hr />
+            <h1>学生信息</h1>
+            <button @click="addSex">添加性别</button>
+            <h2>学生姓名：{{ student.name }}</h2>
+            <h2 v-if="student.sex">学生性别：{{ student.sex }}</h2>
+            <h2>学生年龄：真实{{ student.age.rAge }}，对外：{{ student.age.sAge }}</h2>
+            <h2>爱好</h2>
+            <ul>
+                <li v-for="(item,index) in student.hobby" :key="index">
+                    {{ item }}
+                </li>
+            </ul>
+            <h2>朋友们</h2>
+            <ul>
+                <li v-for="(item,index) in student.friends" :key="index">
+                    {{ item.name }} - {{ item.age }}
+                </li>
+            </ul>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            const vm = new Vue({
+                el: '#app',
+                data: {
+                    user: {
+                        name: '小李',
+                        address: '西安',
+                    },
+                    student: {
+                        name: 'isYangs',
+                        age: {
+                            rAge: 19,
+                            sAge: 18,
+                        },
+                        hobby: ['听音乐', '看电影', 'Coding'],
+                        friends: [
+                            { name: '小明', age: 18 },
+                            { name: '小红', age: 19 },
+                            { name: '小刚', age: 20 },
+                        ],
+                    },
+                },
+                methods: {
+                    addSex() {
+                        // Vue.set(this.student, 'sex', '男');
+                        this.$set(this.student, 'sex', '男');
+                    },
+                    addWork() {
+                        Vue.set(this.user, 'work', '前端开发工程师');
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>

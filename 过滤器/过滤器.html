@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>过滤器</title>
+    </head>
+    <body>
+        <div id="app">
+            <h2>显示格式化后的时间</h2>
+            <h3>现在是：{{time}}</h3>
+            <!-- 计算属性实现 -->
+            <h3>现在是：{{fmtTime}}</h3>
+            <!-- methods实现 -->
+            <h3>现在是：{{getFmtTime()}}</h3>
+            <!-- 过滤器实现 -->
+            <h3>现在是：{{time | timeFormat}}</h3>
+            <!-- 过滤器实现（传参） -->
+            <h3>现在是：{{time | timeFormat('YYYY年MM月DD日')}}</h3>
+            <!-- 过滤器的链式用法 -->
+            <h3>现在是：{{time | timeFormat('YYYY年MM月DD日') | mySlice}}</h3>
+            <h3 :x="msg | mySlice">isYangs</h3>
+        </div>
+        <div id="app2">
+            <h1>{{msg | mySlice}}</h1>
+        </div>
+        <script src="../js/vue.js"></script>
+        <script src="../js/dayjs.min.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            Vue.filter('mySlice', function (val) {
+                return val.slice(0, 4);
+            });
+
+            new Vue({
+                el: '#app',
+                data: {
+                    time: new Date().getTime(),
+                    msg: '你好，isYangs',
+                },
+                computed: {
+                    fmtTime() {
+                        return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss');
+                    },
+                },
+                methods: {
+                    getFmtTime() {
+                        return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss');
+                    },
+                },
+                filters: {
+                    timeFormat(val, str = 'YYYY年MM月DD日 HH:mm:ss') {
+                        return dayjs(val).format(str);
+                    },
+                },
+            });
+            new Vue({
+                el: '#app2',
+                data: {
+                    msg: 'hello,world',
+                },
+            });
+        </script>
+    </body>
+</html>

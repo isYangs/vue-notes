@@ -36,7 +36,9 @@
                     updateMei() {
                         // this.persons[0].name = '赵露思'; // 奏效
                         // this.persons[0].age = '23'; // 奏效
-                        this.persons[0] = { id: 1, name: '赵露思', age: 23, sex: '女' };
+                        // 解决办法
+                        //this.persons[0] = { id: 1, name: '赵露思', age: 23, sex: '女' };
+                        this.persons.splice(0, 1, { id: 1, name: '赵露思', age: 23, sex: '女' });
                     },
                 },
             });
