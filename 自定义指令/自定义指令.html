@@ -18,9 +18,12 @@
             </h2>
             <h2>
                 放大10倍后的n值是：
+                <!-- <span v-big-number="n"></span> -->
                 <span v-big="n"></span>
             </h2>
             <button @click="n++">点我n++</button>
+            <hr />
+            <input type="text" v-fbind:value="n" />
         </div>
 
         <script src="../js/vue.js"></script>
@@ -34,11 +37,31 @@
                 },
                 directives: {
                     // big函数何时被调用？1、指令与元素成功绑定时。2、指令所在的模板被重新渲染时
+                    /* 'big-number'(el, binding) {
+                        // 指令的定义
+                        // el: 指令所绑定的元素
+                        // binding: 指令所绑定的值
+                        el.innerText = binding.value * 10;
+                    }, */
                     big(el, binding) {
                         // 指令的定义
                         // el: 指令所绑定的元素
                         // binding: 指令所绑定的值
                         el.innerText = binding.value * 10;
+                    },
+                    fbind: {
+                        // 指令与元素成功绑定时
+                        bind(el, binding) {
+                            el.value = binding.value;
+                        },
+                        // 指令所在元素被插入页面时
+                        inserted(el) {
+                            el.focus();
+                        },
+                        // 指令所在的模板被重新渲染时
+                        update(el, binding) {
+                            el.value = binding.value;
+                        },
                     },
                 },
             });
