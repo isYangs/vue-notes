@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>组件的嵌套</title>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            // 定义博客组件
+            const blog = Vue.extend({
+                template: `
+                <div>
+                    <h2>博客名称：{{name}}</h2>
+                    <h2>博客地址：点我去<a :href="address" target="_blank">{{name}}</a>的博客</h2>
+                </div>
+            `,
+                data() {
+                    return {
+                        name: "isYangs's Blog",
+                        address: 'https://xuewuzhibu.cn',
+                    };
+                },
+            });
+
+            // 定义用户信息组件
+            const userinfo = Vue.extend({
+                template: `
+                <div>
+                    <h2>英文名：{{name}}</h2>
+                    <h2>本人年龄：{{age}}</h2>
+                    <h2>本人介绍：{{introduce}}</h2>
+                    <button @click="showName">点我提示英文名</button>
+                    <hr />
+                    <blog></blog>
+                </div>
+            `,
+                data() {
+                    return {
+                        name: 'isYangs',
+                        age: 18,
+                        introduce: '我是一个前端开发者',
+                    };
+                },
+                methods: {
+                    showName() {
+                        alert(this.name);
+                    },
+                },
+                components: {
+                    blog,
+                },
+            });
+
+            // 定义hello组件
+            const hello = Vue.extend({
+                template: `
+                <h1>{{msg}}</h1>
+                `,
+                data() {
+                    return {
+                        msg: '你好，欢迎访问！',
+                    };
+                },
+            });
+
+            //定义app组件
+            const app = Vue.extend({
+                template: `
+                <div>
+                    <hello></hello>
+                    <userinfo></userinfo>
+                </div>
+                `,
+                components: {
+                    userinfo,
+                    hello,
+                },
+            });
+
+            // 创建 Vue 实例
+            new Vue({
+                template:`<app></app>`,
+                el: '#app',
+                // 注册组件(局部注册)
+                components: {
+                    app,
+                },
+            });
+        </script>
+    </body>
+</html>

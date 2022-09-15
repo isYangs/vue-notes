@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vue.Component构造函数</title>
+    </head>
+    <body>
+        <div id="app">
+            <blog></blog>
+            <hello></hello>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            const blog = Vue.extend({
+                name: 'isYangsBlog',
+                template: `
+                <div>
+                    <h2>博客名称：{{name}}</h2>
+                    <h2>博客地址：点我去<a :href="address" target="_blank">{{name}}</a>的博客</h2>
+                    <button @click="showName">点我提示博客名称</button>
+                </div>
+            `,
+                data() {
+                    return {
+                        name: "isYangs's Blog",
+                        address: 'https://xuewuzhibu.cn',
+                    };
+                },
+                methods: {
+                    showName() {
+                        console.log(this);
+                        // alert(this.name);
+                    },
+                },
+            });
+
+            const hello = Vue.extend({
+                name: 'hello',
+                template: `
+                <div>
+                    <h2>{{msg}}</h2>
+                </div>
+                `,
+                data() {
+                    return {
+                        msg: 'Hello Vue.js',
+                    };
+                },
+            });
+
+            blog.a = 99;
+            console.log('@', blog.a);
+            console.log('#', hello.a);
+
+            new Vue({
+                el: '#app',
+                components: {
+                    blog,
+                    hello,
+                },
+            });
+        </script>
+    </body>
+</html>

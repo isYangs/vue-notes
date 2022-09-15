@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>几个注意点</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{msg}}</h1>
+            <user-info></user-info>
+            <!-- <UserInfo></UserInfo> -->
+            <user-info />
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+
+            const userInfo = {
+                name: 'UserInfo',
+                template: `
+                    <div>
+                        <h2>英文名：{{name}}</h2>
+                        <h2>本人年龄：{{age}}</h2>
+                        <h2>本人介绍：{{introduce}}</h2>
+                        <button @click="showName">点我提示英文名</button>
+                    </div>
+                `,
+                data() {
+                    return {
+                        name: 'isYangs',
+                        age: 18,
+                        introduce: '我是一个前端开发者',
+                    };
+                },
+                methods: {
+                    showName() {
+                        alert(this.name);
+                    },
+                },
+            };
+
+            new Vue({
+                el: '#app',
+                data: {
+                    msg: '欢迎学习Vue',
+                },
+                components: {
+                    'user-info': userInfo,
+                    // UserInfo: userInfo,
+                },
+            });
+        </script>
+    </body>
+</html>
