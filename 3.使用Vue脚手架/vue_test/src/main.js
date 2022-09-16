@@ -10,6 +10,11 @@ Vue.config.productionTip = false
 
 // 创建Vue实例对象vm
 new Vue({
-  // 将App组件渲染到页面上
+  // render函数的功能：将App组件渲染到页面上
+  // 简写形式
   render: h => h(App),
+  // 完整形式
+  /* render(createElement){
+    return createElement('h2',{class:'box'},'hello world')
+  } */
 }).$mount('#app')
