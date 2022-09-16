@@ -1,6 +1,12 @@
-/.idea/
-/.vscode/
-node_modules/
 .DS_Store
-.gitignore
 _config.yml
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.gitignore
