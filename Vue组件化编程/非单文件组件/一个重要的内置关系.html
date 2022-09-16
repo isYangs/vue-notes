@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一个重要的内置关系</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>一个重要的内置关系</title>
+    </head>
+    <body>
+        <div id="app">
+            <blog></blog>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script>
+            Vue.config.productionTip = false; // 阻止 Vue 在启动时生成生产环境提示
+            Vue.prototype.x = 99;
+
+            const blog = Vue.extend({
+                template: `
+                    <div>
+                        <h2>博客名称：{{name}}</h2>
+                        <h2>博客地址：点我去<a :href="address" target="_blank">{{name}}</a>的博客</h2>
+                        <button @click="showX">点我输出x</button>
+                    </div>
+                `,
+                data() {
+                    return {
+                        name: "isYangs's Blog",
+                        address: 'https://xuewuzhibu.cn',
+                    };
+                },
+                methods: {
+                    showX() {
+                        console.log(this.x);
+                    },
+                },
+            });
+
+            new Vue({
+                el: '#app',
+                data: {
+                    msg: '你好',
+                },
+                components: {
+                    blog,
+                },
+            });
+
+            console.log(blog.prototype.__proto__ === Vue.prototype); // true
+
+            // 定义一个构造函数
+            /* function Demo() {
+                this.a = 1;
+                this.b = 2;
+            }
+            // 创建一个Demo的实例对象
+            const d = new Demo();
+            console.log(Demo.prototype) // 显示原型属性
+            console.log(d.__proto__) // 隐式原型属性
+
+            console.log(Demo.prototype === d.__proto__) // true
+
+            // 程序员通过显示原型属性操作原型对象，追加一个x属性，值为99
+            Demo.prototype.x = 99;
+
+            console.log(d.x) */
+        </script>
+    </body>
 </html>
