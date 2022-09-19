@@ -1,4 +1,5 @@
 <template>
+    <!-- 组件的结构 -->
     <div class="demo">
         <h2>英文名：{{ name }}</h2>
         <h2>本人年龄：{{ age }}</h2>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+// 组件交互相关的代码（数据、方法等等）
 export default {
     name: 'UserInfo',
     data() {
@@ -20,6 +22,7 @@ export default {
 </script>
 
 <style scoped>
+/* 组件的样式 */
 .demo {
     width: 400px;
     height: 300px;
