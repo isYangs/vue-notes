@@ -1,28 +1,26 @@
 <template>
     <div>
-        <h2>博客名称：{{ name | mySlice }}</h2>
+        <h2 @click="showName">博客名称：{{ name }}</h2>
         <h2>
             博客地址：点我去
             <a :href="address" target="_blank">{{ name }}</a>
             的博客
         </h2>
-        <button @click="testHello">点我测试一下hello方法</button>
     </div>
 </template>
 
 <script>
+// 引入一个mixin（混合）
+// import { mixin, mixin2 } from '../mixin';
 export default {
     name: 'BlogUser',
     data() {
         return {
             name: "isYangs's Blog",
             address: 'https://xuewuzhibu.cn',
+            x: 666,
         };
     },
-    methods: {
-        testHello() {
-            this.hello();
-        },
-    },
+    // mixins: [mixin, mixin2],
 };
 </script>
