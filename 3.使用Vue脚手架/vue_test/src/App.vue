@@ -3,8 +3,16 @@
         <div class="todo-container">
             <div class="todo-wrap">
                 <AddTodo :addTodo="addTodo" />
-                <TodoList :todoData="todoData" />
-                <RemoveTodo />
+                <TodoList
+                    :todoData="todoData"
+                    :checkTodo="checkTodo"
+                    :deleteTodoItem="deleteTodoItem"
+                />
+                <RemoveTodo
+                    :todoData="todoData"
+                    :checkAllTodo="checkAllTodo"
+                    :clearAllTodo="clearAllTodo"
+                />
             </div>
         </div>
     </div>
@@ -25,15 +33,36 @@ export default {
     data() {
         return {
             todoData: [
-                { id: this.$nanoid(), title: '吃饭', done: true },
+                { id: this.$nanoid(), title: '吃饭', done: false },
                 { id: this.$nanoid(), title: 'Coding', done: true },
                 { id: this.$nanoid(), title: '打游戏', done: false },
             ],
         };
     },
     methods: {
+        // 添加todo
         addTodo(todoObj) {
             this.todoData.unshift(todoObj);
+        },
+        // 勾选 or 取消勾选一个todo
+        checkTodo(id) {
+            this.todoData.forEach(todo => {
+                if (todo.id === id) todo.done = !todo.done;
+            });
+        },
+        // 删除一个todo
+        deleteTodoItem(id) {
+            this.todoData = this.todoData.filter(todo => todo.id !== id);
+        },
+        // 是否全选
+        checkAllTodo(done) {
+            this.todoData.forEach(todo => {
+                todo.done = done;
+            });
+        },
+        // 清楚所有已完成的todo
+        clearAllTodo() {
+            this.todoData = this.todoData.filter(todo => !todo.done);
         },
     },
 };

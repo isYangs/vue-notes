@@ -1,6 +1,12 @@
 <template>
     <ul class="todo-list">
-        <TodoItem v-for="todoItem in todoData" :key="todoItem.id" :todo='todoItem' />
+        <TodoItem
+            v-for="todoItem in todoData"
+            :key="todoItem.id"
+            :todo="todoItem"
+            :checkTodo="checkTodo"
+            :deleteTodoItem="deleteTodoItem"
+        />
     </ul>
 </template>
 
@@ -9,7 +15,7 @@ import TodoItem from './TodoItem.vue';
 export default {
     name: 'TodoList',
     components: { TodoItem },
-    props: ['todoData'],
+    props: ['todoData', 'checkTodo','deleteTodoItem'],
 };
 </script>
 

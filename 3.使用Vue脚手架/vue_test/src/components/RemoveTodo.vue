@@ -1,19 +1,51 @@
 <template>
-    <div class="remove-todo">
+    <div class="remove-todo" v-show="total">
         <label>
-            <input type="checkbox" />
+            <!-- <input type="checkbox" :checked="isAll" @change="checkAll" /> -->
+            <input type="checkbox" v-model="isAll" />
         </label>
         <span>
-            <span>已完成0</span>
-            / 全部2
+            <span>已完成{{ doneTotal }}</span>
+            / 全部{{ total }}
         </span>
-        <button class="btn btn-danger">清除已完成任务</button>
+        <button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
     </div>
 </template>
 
 <script>
 export default {
     name: 'RemoveTodo',
+    props: ['todoData', 'checkAllTodo', 'clearAllTodo'],
+    computed: {
+        // 总数
+        total() {
+            return this.todoData.length;
+        },
+        // 已完成数
+        doneTotal() {
+            return this.todoData.reduce((pre, todo) => pre + (todo.done ? 1 : 0), 0);
+        },
+        // 控制全选框
+        isAll: {
+            // 全选框是否勾选
+            get() {
+                return this.doneTotal === this.total && this.total !== 0;
+            },
+            // isAll改变时触发
+            set(val) {
+                this.checkAllTodo(val);
+            },
+        },
+    },
+    methods: {
+        // 全选 or 全不选
+        /* checkAll(evt) {
+            this.checkAllTodo(evt.target.checked);
+        }, */
+        clearAll() {
+            this.clearAllTodo();
+        },
+    },
 };
 </script>
 
