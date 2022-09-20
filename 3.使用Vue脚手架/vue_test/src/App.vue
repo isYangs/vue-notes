@@ -1,20 +1,79 @@
 <template>
-    <div>
-        <Blog />
-        <hr />
-        <User />
+    <div id="root">
+        <div class="todo-container">
+            <div class="todo-wrap">
+                <AddTodo :addTodo="addTodo" />
+                <TodoList :todoData="todoData" />
+                <RemoveTodo />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import Blog from './components/BlogUser.vue';
-import User from './components/UserInfo.vue';
+import AddTodo from './components/AddTodo.vue';
+import TodoList from './components/TodoList.vue';
+import RemoveTodo from './components/RemoveTodo.vue';
 
 export default {
     name: 'App',
     components: {
-        User,
-        Blog,
+        AddTodo,
+        TodoList,
+        RemoveTodo,
+    },
+    data() {
+        return {
+            todoData: [
+                { id: this.$nanoid(), title: '吃饭', done: true },
+                { id: this.$nanoid(), title: 'Coding', done: true },
+                { id: this.$nanoid(), title: '打游戏', done: false },
+            ],
+        };
+    },
+    methods: {
+        addTodo(todoObj) {
+            this.todoData.unshift(todoObj);
+        },
     },
 };
 </script>
+
+<style>
+body {
+    background: #fff;
+}
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #da4f49;
+    border: 1px solid #bd362f;
+}
+.btn-danger:hover {
+    color: #fff;
+    background-color: #bd362f;
+}
+.btn:focus {
+    outline: none;
+}
+.todo-container {
+    width: 600px;
+    margin: 0 auto;
+}
+.todo-container .todo-wrap {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+</style>

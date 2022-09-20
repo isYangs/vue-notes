@@ -1,8 +1,8 @@
 <template>
     <div class="demo">
-        <h2>英文名：{{ name }}</h2>
+        <span>这是用户信息</span>
+        <h2 class="title">英文名：{{ name }}</h2>
         <h2>个人介绍：{{ introduce }}</h2>
-        <input type="text" v-fbind:name="name">
     </div>
 </template>
 
@@ -17,3 +17,13 @@ export default {
     },
 };
 </script>
+
+<style lang="less">
+.demo {
+    background: orange;
+    span{
+        color: palegreen;
+        font-size: 50px;
+    }
+}
+</style>
