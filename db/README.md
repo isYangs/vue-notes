@@ -11,8 +11,14 @@ npm install -g json-server
 
 ```
 cd db
-json-server -w student.json
+json-server -w students.json
 ```
+
+见下图所示
+
+![1663809797585.png](https://a.xuewuzhibu.cn/1/632bb91135c74-1.png)
+
+![1663809906656.png](https://a.xuewuzhibu.cn/1/632bb977dc3d6-1.png)
 
 > 注意：请在两个终端中分别执行，如果你的端口被占用，可以使用`-p`参数指定端口，但是要确保两个端口不能相同
 
