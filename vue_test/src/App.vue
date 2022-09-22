@@ -1,29 +1,36 @@
 <template>
-    <div>
-        <button @click="getStudents">获取学生信息</button>
-        <button @click="getCars">获取汽车信息</button>
+    <div class="root">
+        <Search />
+        <List />
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap';
+import Search from './components/Search.vue';
+import List from './components/List.vue';
 export default {
     name: 'App',
-    methods: {
-        getStudents() {
-            axios.get('http://localhost:8080/api/students').then(response => {
-                console.log(response.data);
-            }, error => {
-                console.log(error.message);
-            })
-        },
-        getCars() {
-            axios.get('http://localhost:8080/demo/cars').then(response => {
-                console.log(response.data);
-            }, error => {
-                console.log(error.message);
-            })
-        }
+    components: {
+        Search,
+        List,
     },
 };
 </script>
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+.root {
+    width: 80%;
+    margin: 0 auto;
+}
+</style>
