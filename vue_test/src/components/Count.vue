@@ -40,6 +40,9 @@ export default {
             }, 500);
         },
     },
+    mounted() {
+        console.log('Count',this)
+    },
 };
 </script>
 
