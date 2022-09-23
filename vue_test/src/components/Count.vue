@@ -8,15 +8,17 @@
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-        <button @click="increment">+</button>
-        <button @click="decrement">-</button>
-        <button @click="incrementOdd">当前求和为奇数再加</button>
-        <button @click="incrementWait">等一等再加</button>
+        <button @click="increment(n)">+</button>
+        <!-- <button @click="INCREMENT(n)">+</button> -->
+        <button @click="decrement(n)">-</button>
+        <!-- <button @click="DECREMENT(n)">-</button> -->
+        <button @click="incrementOdd(n)">当前求和为奇数再加</button>
+        <button @click="incrementWait(n)">等一等再加</button>
     </div>
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
 export default {
     name: 'Count',
     data() {
@@ -25,30 +27,36 @@ export default {
         };
     },
     methods: {
-        increment() {
+        // 自己写方法
+        /* increment() {
             this.$store.commit('INCREMENT', this.n);
         },
         decrement() {
             this.$store.commit('DECREMENT', this.n);
-        },
-        incrementOdd() {
+        }, */
+
+        // 使用mapMutations生成对应的方法，方法中会调用commit去联系mutations（对象的写法）
+        ...mapMutations({ increment: 'INCREMENT', decrement: 'DECREMENT' }),
+
+        // 使用mapMutations生成对应的方法，方法中会调用commit去联系mutations（数组的写法）
+        // ...mapMutations(['INCREMENT', 'DECREMENT']),
+
+        // 自己写方法
+        /* incrementOdd() {
             this.$store.dispatch('incrementOdd', this.n);
         },
         incrementWait() {
             this.$store.dispatch('incrementWait', this.n);
-        },
+        }, */
+
+        // 使用mapActions生成对应的方法，方法中会调用dispatch去联系actions（对象的写法）
+        // ...mapActions({ incrementOdd: 'incrementOdd', incrementWait: 'incrementWait' }),
+
+        // 使用mapActions生成对应的方法，方法中会调用dispatch去联系actions（数组的写法）
+        ...mapActions(['incrementOdd', 'incrementWait']),
     },
     computed: {
-        // 借助mapState生成计算属性，从state中读取数据。（对象写法）
-        // ...mapState({ sum: 'sum', name: 'name', subject: 'subject' }),
-        
-        // 借助mapState生成计算属性，从state中读取数据。（数组写法）
         ...mapState(['sum', 'name', 'subject']),
-
-        // 借助mapGetters生成计算属性，从getters中读取数据。（对象写法）
-        // ...mapGetters({ bigSum: 'bigSum' }),
-
-        // 借助mapGetters生成计算属性，从getters中读取数据。（数组写法）
         ...mapGetters(['bigSum']),
     },
 };
