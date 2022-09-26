@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>当前求和为：{{ sum }}</h1>
-        <h3>当前求和放大10倍为：{{ $store.getters.bigSum }}</h3>
+        <h3>当前求和放大10倍为：{{ bigSum }}</h3>
         <h3>我是{{ name }}，正在学习{{ subject }}</h3>
         <select v-model.number="n">
             <option value="1">1</option>
