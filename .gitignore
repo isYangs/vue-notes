@@ -11,3 +11,4 @@ node_modules
 *.sln
 *.sw?
 .gitignore
+/prettier.config.js
